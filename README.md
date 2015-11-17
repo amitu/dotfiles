@@ -1,6 +1,11 @@
 Features | Change log
 =====================
 
+git: .gitignore
+---------------
+
+Bunch of files we normally ignore.
+
 git: git-config
 ---------------
 

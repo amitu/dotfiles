@@ -6,4 +6,5 @@ install:
 	cp .zshrc ~
 	cp .githelpers ~
 	cp .gitconfig ~
+	cp .gitignore ~
 

@@ -1,1 +1,16 @@
 *.cache
+*.py[co]
+.egg
+.egg-info
+dist
+build
+_build
+.eggs
+sdist
+develop-eggs
+.installed.cfg
+
+.tox
+.DS_Store
+node_modules
+secret.txt
