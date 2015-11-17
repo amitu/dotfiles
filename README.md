@@ -1,6 +1,19 @@
 Features | Change log
 =====================
 
+vim: keyboard shortcuts
+---------------------
+
+LEADER: ,
+
+LADER SPACE: remove all highlights.
+LEADER 1: toggle numbering
+LEADER l: toggle numbering style
+LEADER m: run make (with no argument)
+
+jk: Esc
+SPACE: za (toggle fold)
+
 git: .gitignore
 ---------------
 

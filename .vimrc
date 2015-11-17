@@ -20,7 +20,6 @@ set autoindent
 " UI Layout {{{
 set number              " show line numbers
 set showcmd             " show command in bottom bar
-set nocursorline          " highlight current line
 set wildmenu
 "set lazyredraw
 set showmatch           " higlight matching parenthesis
@@ -43,8 +42,6 @@ nnoremap j gj
 nnoremap k gk
 nnoremap B ^
 nnoremap E $
-nnoremap $ <nop>
-nnoremap ^ <nop>
 nnoremap gV `[v`]
 onoremap an :<c-u>call <SID>NextTextObject('a', 'f')<cr>
 xnoremap an :<c-u>call <SID>NextTextObject('a', 'f')<cr>
@@ -60,21 +57,10 @@ xnoremap il :<c-u>call <SID>NextTextObject('i', 'F')<cr>
 let mapleader=","
 nnoremap <leader>m :silent make\|redraw!\|cw<CR>
 nnoremap <leader>w :NERDTree<CR>
-nnoremap <leader>u :GundoToggle<CR>
 nnoremap <leader>h :A<CR>
-nnoremap <leader>ev :vsp $MYVIMRC<CR>
-nnoremap <leader>ez :vsp ~/.zshrc<CR>
-nnoremap <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>l :call ToggleNumber()<CR>
 nnoremap <leader><space> :noh<CR>
-nnoremap <leader>s :mksession<CR>
-nnoremap <leader>a :Ag 
-nnoremap <leader>c :SyntasticCheck<CR>:Errors<CR>
 nnoremap <leader>1 :set number!<CR>
-nnoremap <leader>d :Make! 
-nnoremap <leader>r :call RunTestFile()<CR>
-nnoremap <leader>g :call RunGoFile()<CR>
-vnoremap <leader>y "+y
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 inoremap jk <esc>
@@ -153,28 +139,6 @@ function! ToggleNumber()
     endif
 endfunc
 
-function! RunTestFile()
-    if(&ft=='python')
-        exec ":!" . ". venv/bin/activate; nosetests " .bufname('%') . " --stop"
-    endif
-endfunction
-
-function! RunGoFile()
-    if(&ft=='go')
-        exec ":new|0read ! go run " . bufname('%')
-    endif
-endfunction
-
-function! RunTestsInFile()
-    if(&ft=='php')
-        :execute "!" . "/Users/dblack/pear/bin/phpunit -d memory_limit=512M -c /usr/local/twilio/src/php/tests/config.xml --bootstrap /usr/local/twilio/src/php/tests/bootstrap.php " . bufname('%') . ' \| grep -v Configuration \| egrep -v "^$" '
-    elseif(&ft=='go')
-        exec ":!gp test"
-    elseif(&ft=='python')
-        exec ":read !" . ". venv/bin/activate; nosetests " . bufname('%') . " --nocapture"
-    endif
-endfunction
-
 " strips trailing whitespace at the end of files. this
 " is called on buffer write in the autogroup above.
 function! <SID>StripTrailingWhitespaces()
@@ -187,18 +151,6 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfunction
 
-function! <SID>CleanFile()
-    " Preparation: save last search, and cursor position.
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    " Do the business:
-    %!git stripspace
-    " Clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
-endfunction
- 
 function! s:NextTextObject(motion, dir)
   let c = nr2char(getchar())
  
