@@ -2,6 +2,9 @@
 " Colors {{{
 syntax enable           " enable syntax processing
 colorscheme badwolf
+
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.*/
 " }}}
 " Misc {{{
 set ttyfast                     " faster redraw
@@ -16,6 +19,8 @@ set modelines=1
 filetype indent on
 filetype plugin on
 set autoindent
+set listchars=tab:»·,trail:·
+set list
 " }}}
 " UI Layout {{{
 set number              " show line numbers
@@ -38,6 +43,11 @@ nnoremap <space> za
 set foldlevelstart=10    " start with fold level of 1
 " }}}
 " Line Shortcuts {{{
+" reflow para shortcut
+nnoremap Q gqap
+" " for visual mode
+vnoremap Q gq
+nnoremap ; :
 nnoremap j gj
 nnoremap k gk
 nnoremap B ^

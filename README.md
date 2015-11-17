@@ -1,6 +1,13 @@
 Features | Change log
 =====================
 
+vim: show space etc, and mark long lines
+----------------------------------------
+
+Space is shown as ., and tab as some other char.
+
+Also lines longer than 80 char will have trailing parts shown in red.
+
 vim: keyboard shortcuts
 ---------------------
 
@@ -17,6 +24,10 @@ LEADER m: run make (with no argument)
 jk: Esc
 
 SPACE: za (toggle fold)
+
+Q: reflow para
+
+;: :
 
 git: .gitignore
 ---------------
