@@ -1,6 +1,11 @@
 Features | Change log
 ---------------------
 
+git: git-config
+===============
+
+Name, email and `push.default simple`.
+
 zsh: CDPATH
 ===========
 

@@ -5,4 +5,5 @@ install:
 	cp .vimrc ~
 	cp .zshrc ~
 	cp .githelpers ~
+	cp .gitconfig ~
 
