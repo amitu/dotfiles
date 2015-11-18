@@ -2,6 +2,7 @@
 " Colors {{{
 syntax enable           " enable syntax processing
 colorscheme badwolf
+set cursorline
 
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.*/
