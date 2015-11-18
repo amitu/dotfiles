@@ -10,6 +10,10 @@
     :ensure t
 )
 
+(use-package magit
+    :ensure t
+)
+
 (set 'use-package-verbose t)
 
 ; show how long it took to load emacs
