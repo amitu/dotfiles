@@ -6,7 +6,7 @@ update:
 	make install
 
 install: ~/.vim ~/.vimrc ~/.zshrc ~/.gitconfig ~/.gitignore ~/.oh-my-zsh \
-	~/.gitignore ~/.githelpers
+	~/.gitignore ~/.githelpers ~/.emacs.d
 
 ~/.vim:
 	ln -s `pwd`/vim ~/.vim
@@ -29,7 +29,12 @@ install: ~/.vim ~/.vimrc ~/.zshrc ~/.gitconfig ~/.gitignore ~/.oh-my-zsh \
 ~/.oh-my-zsh:
 	sh -c "$(curl -fsSL ${OHMYZSH})"
 
+~/.emacs.d:
+	ln -s `pwd`/emacs.d ~/.emacs.d
+
 clean:
+	-@rm ~/.emacs.d
+	-@rm ~/.emacs
 	-@rm ~/.vim
 	-@rm ~/.vimrc
 	-@rm ~/.zshrc
@@ -38,5 +43,8 @@ clean:
 	-@rm ~/.gitignore
 
 brew:
-	brew install git redis go node tree unrar wget zsh cask python
+	brew install git tree unrar wget zsh cask htop
+	brew install redis
+	brew install go node python
+	bre install emacs macvim
 	brew cask install iterm2 google-chrome firefox vlc flux

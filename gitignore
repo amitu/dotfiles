@@ -1,5 +1,6 @@
 *.cache
-*.py[co]
+*.pyc
+*.pyo
 .egg
 .egg-info
 dist

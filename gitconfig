@@ -1,5 +1,7 @@
 [user]
-	name = Amit Upadhyay
-	email = code@amitu.com
+    name = Amit Upadhyay
+    email = code@amitu.com
 [push]
-	default = simple
+    default = simple
+[core]
+	excludesfile = /Users/amitu/.gitignore

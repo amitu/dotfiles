@@ -1,6 +1,16 @@
 Features | Change log
 =====================
 
+emacs: show startup time
+------------------------
+
+Time to load emacs is shown when emacs starts.
+
+zsh: cdls
+---------
+
+On `cd` it does a `ls`. Slightly broken.
+
 vim: show space etc, and mark long lines
 ----------------------------------------
 

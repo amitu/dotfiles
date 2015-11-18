@@ -43,3 +43,9 @@ export PIP_REQUIRE_VIRTUALENV=true
 gpip() {
    PIP_REQUIRE_VIRTUALENV="" pip "$@"
 }
+
+# after every 'cd', perform 'ls' if cd succeeded
+cdls() {
+  builtin cd "$*" && ls
+}
+alias cd="cdls"
