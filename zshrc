@@ -46,6 +46,11 @@ gpip() {
 
 # after every 'cd', perform 'ls' if cd succeeded
 cdls() {
-  builtin cd "$*" && ls
+    if [ -z "$*" ]  # if $* is not set
+    then
+        builtin cd && ls
+    else
+        builtin cd "$*" && ls
+    fi
 }
 alias cd="cdls"

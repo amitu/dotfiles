@@ -9,7 +9,7 @@ Time to load emacs is shown when emacs starts.
 zsh: cdls
 ---------
 
-On `cd` it does a `ls`. Slightly broken.
+On `cd` it does a `ls`.
 
 vim: show space etc, and mark long lines
 ----------------------------------------
