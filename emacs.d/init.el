@@ -7,11 +7,32 @@
 (require 'use-package)
 
 (use-package projectile
-    :ensure t
+  ; docs: http://batsov.com/projectile/
+  :ensure t
+  :init
+  (setq projectile-indexing-method 'alien)
+  (setq projectile-completion-system 'helm)
+  (setq projectile-enable-caching t)
+  :config
+  (projectile-global-mode)
+  ; C-u S-f (flush cache, and find file)
+  (define-key projectile-mode-map [?\s-f] 'projectile-find-file)
+  ; keybindings:
+  ; - TODO: kill list of projects
+
+  ; https://github.com/nex3/perspective-el
+)
+
+(global-set-key [?\s-p] 'projectile-switch-project)
+
+(use-package helm-projectile
+  :ensure t
+  :config
+  (helm-projectile-on)
 )
 
 (use-package magit
-    :ensure t
+  :ensure t
 )
 
 (set 'use-package-verbose t)
