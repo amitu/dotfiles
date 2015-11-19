@@ -34,7 +34,10 @@
 (use-package magit
   :ensure t
 )
-(global-set-key (kbd "C-c s") 'magit-status)
+(global-set-key (kbd "C-c s"  ) 'magit-status)
+(global-set-key (kbd "C-c d"  ) 'magit-diff-unstaged)
+(global-set-key (kbd "C-c D"  ) 'magit-diff-staged)
+(global-set-key (kbd "C-c C-d") 'magit-diff)
 
 (set 'use-package-verbose t)
 

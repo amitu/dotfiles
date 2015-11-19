@@ -21,8 +21,17 @@ emacs: magit
 
 C-c s: git status.
 
-Magit Status major mode.
+C-c d: unstaged diff
 
+C-c D: staged diff
+
+C-c C-d: uncommmitted diff
+
+Magit status major mode:
+
+C-c C-c c: commit
+
+C-c C-c P: push
 
 emacs: show startup time
 ------------------------
