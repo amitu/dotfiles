@@ -34,8 +34,50 @@
 (use-package magit
   :ensure t
 )
+(global-set-key (kbd "C-c s") 'magit-status)
 
 (set 'use-package-verbose t)
+
+;;;;;;;
+;;;;;;; User Customizations
+;;;;;;;
+
+; fix scrolling behaviour
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; no acceleration
+(setq mouse-wheel-follow-mouse 't) ;; scroll the right window
+
+
+; Ctrl-up/down will scroll but will keep focus in same line
+(defun gcm-scroll-down ()
+  (interactive)
+  (scroll-up (/ (window-text-height) 3))
+)
+
+(defun gcm-scroll-up ()
+  (interactive)
+  (scroll-down (/ (window-text-height) 3))
+)
+
+(global-set-key [(control down)] 'gcm-scroll-down)
+(global-set-key [(control up)]   'gcm-scroll-up)
+
+; meta up/down will scroll by one window
+(defun sfp-page-down ()
+  (interactive)
+  (next-line (- (/ (window-text-height) 2) next-screen-context-lines))
+)
+    
+(defun sfp-page-up ()
+  (interactive)
+  (previous-line (- (/ (window-text-height) 2) next-screen-context-lines))
+)
+
+(global-set-key [(meta down)] 'sfp-page-down)
+(global-set-key [(meta up)] 'sfp-page-up)
+
+; no toolbar
+(tool-bar-mode -1)
 
 ; show how long it took to load emacs
 ; this must be the last few lines of this file

@@ -1,6 +1,29 @@
 Features | Change log
 =====================
 
+emacs: fixed scrolling behaviour
+--------------------------------
+
+Smooth touchpage scrolling etc. C-up/down and M-up/down for quick keyboard
+scroll.
+
+emacs: projectile
+-----------------
+
+Command-f: list files in current "project".
+
+Ctrl-u Command-f: clear cache and list files.
+
+Command-P: switch projects.
+
+emacs: magit
+------------
+
+C-c s: git status.
+
+Magit Status major mode.
+
+
 emacs: show startup time
 ------------------------
 
