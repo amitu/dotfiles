@@ -1,6 +1,37 @@
 Features | Change log
 =====================
 
+emacs: helm
+-----------
+
+C-c C-i: insert the current selection into the buffer, good for inserting file
+names in buffer.
+
+M-x gets helm mode, C-x f gets helm mode, C-x b gets helm mode!
+
+Buffer mode: @foo will search for all buffers that contain foo.
+
+C-x s: Search in different files.
+
+C-x S: find files.
+
+C-x l: locate, using system locate, searches on all files in system.
+
+On mac, if you have not done this already, you will have to do this once:
+
+```shell
+$ sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
+```
+
+Much more: http://tuhdo.github.io/helm-intro.html
+
+emacs: highlight current line
+-----------------------------
+
+```elisp
+(global-hl-line-mode)
+```
+
 emacs: fixed scrolling behaviour
 --------------------------------
 

@@ -6,6 +6,29 @@
 
 (require 'use-package)
 
+(use-package helm
+  :ensure t
+  :config
+  (require 'helm)
+  (require 'helm-config)
+  (helm-autoresize-mode t)
+  (setq helm-M-x-fuzzy-match t)
+  (setq helm-buffers-fuzzy-matching t)
+  (setq helm-recentf-fuzzy-match t)
+  (if (eq system-type 'darwin)
+    ; this is because http://bit.ly/1O5Ng5h
+    (setq helm-locate-command "mdfind -name %s %s")
+  )
+  (helm-mode 1)
+  (global-set-key (kbd "M-x") 'helm-M-x)
+  (global-set-key (kbd "M-y") 'helm-show-kill-ring)
+  (global-set-key (kbd "C-x b") 'helm-for-files)
+  (global-set-key (kbd "C-x f") 'helm-find-files)
+  (global-set-key (kbd "C-x s") 'helm-do-grep)
+  (global-set-key (kbd "C-x S") 'helm-find)
+  (global-set-key (kbd "C-x l") 'helm-locate)
+)
+
 (use-package projectile
   ; docs: http://batsov.com/projectile/
   :ensure t
@@ -46,6 +69,9 @@
 ;;;;;;;
 ;;;;;;; User Customizations
 ;;;;;;;
+
+; highlight current line globabbly
+(global-hl-line-mode)
 
 ; fix scrolling behaviour
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
