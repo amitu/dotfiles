@@ -17,6 +17,7 @@
   (projectile-global-mode)
   ; C-u S-f (flush cache, and find file)
   (define-key projectile-mode-map [?\s-f] 'projectile-find-file)
+  (define-key projectile-mode-map (kbd "C-c f") 'projectile-find-file)
   ; keybindings:
   ; - TODO: kill list of projects
 
@@ -24,6 +25,7 @@
 )
 
 (global-set-key [?\s-p] 'projectile-switch-project)
+(global-set-key (kbd "C-c p p") 'projectile-switch-project)
 
 (use-package helm-projectile
   :ensure t

@@ -10,11 +10,11 @@ scroll.
 emacs: projectile
 -----------------
 
-Command-f: list files in current "project".
+Command-f, C-c f: list files in current "project".
 
 Ctrl-u Command-f: clear cache and list files.
 
-Command-P: switch projects.
+Command-P, C-c p p: switch projects.
 
 emacs: magit
 ------------
