@@ -4,3 +4,4 @@ emacs.d/recentf
 *.eld
 *~
 emacs.d/url
+/emacs.d/places

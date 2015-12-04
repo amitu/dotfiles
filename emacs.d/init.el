@@ -72,6 +72,13 @@
 (global-set-key (kbd "C-c D"  ) 'magit-diff-staged)
 (global-set-key (kbd "C-c C-d") 'magit-diff)
 
+(use-package saveplace
+  :ensure t
+  :init
+  (setq-default save-place t)
+  (setq save-place-forget-unreadable-files nil)
+)
+
 (set 'use-package-verbose t)
 
 ;;;;;;;
@@ -116,6 +123,12 @@
 
 ; no toolbar
 (tool-bar-mode -1)
+
+; require final newline
+(setq require-final-newline t)
+
+(show-paren-mode 1)
+(setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
 
 ; show how long it took to load emacs
 ; this must be the last few lines of this file
