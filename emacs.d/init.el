@@ -127,7 +127,10 @@
 ; require final newline
 (setq require-final-newline t)
 
+; highlight closing parenthesis
 (show-paren-mode 1)
+
+; backups should go to ~/.emacs.d/backups ;; not sure if it works
 (setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
 
 ; show how long it took to load emacs

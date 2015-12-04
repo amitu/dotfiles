@@ -8,6 +8,8 @@ Ensure there is newline in end of file.
 
 Backups are stored in ~/.emacs.d/backups.
 
+Highlight closing parenthesis.
+
 saveplace: Saves location of cursor when emacs quits or buffer is
 killed, and when opening the file next it moves to last saved point.
 
