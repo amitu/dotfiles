@@ -3,4 +3,4 @@ emacs.d/elpa
 emacs.d/recentf
 *.eld
 *~
-
+emacs.d/url
