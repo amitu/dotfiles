@@ -64,6 +64,14 @@ C-c C-d: uncommmitted diff
 
 Magit status major mode:
 
+i: ignore the current file (adds to .gitignore)
+
+g: refresh the status buffer
+
+s: stage the current file or hunk
+
+Tab: show/hide diff for current file/hunk
+
 C-c C-c c: commit
 
 C-c C-c P: push
