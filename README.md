@@ -4,6 +4,8 @@ Features | Change log
 emacs: helm
 -----------
 
+C-t in helm mode will cycle the location of helm window.
+
 C-c C-i: insert the current selection into the buffer, good for inserting file
 names in buffer.
 
@@ -14,6 +16,8 @@ Buffer mode: @foo will search for all buffers that contain foo.
 C-x s: Search in different files.
 
 C-x S: find files.
+
+C-x O: helmTAB: temp move to position occur (find patter in this file).
 
 C-x l: locate, using system locate, searches on all files in system.
 

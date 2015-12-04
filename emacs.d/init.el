@@ -15,18 +15,26 @@
   (setq helm-M-x-fuzzy-match t)
   (setq helm-buffers-fuzzy-matching t)
   (setq helm-recentf-fuzzy-match t)
-  (if (eq system-type 'darwin)
-    ; this is because http://bit.ly/1O5Ng5h
-    (setq helm-locate-command "mdfind -name %s %s")
-  )
   (helm-mode 1)
   (global-set-key (kbd "M-x") 'helm-M-x)
   (global-set-key (kbd "M-y") 'helm-show-kill-ring)
   (global-set-key (kbd "C-x b") 'helm-for-files)
+  (global-set-key (kbd "C-x C-b") 'helm-for-files)
   (global-set-key (kbd "C-x f") 'helm-find-files)
+  (global-set-key (kbd "C-x C-f") 'helm-find-files)
   (global-set-key (kbd "C-x s") 'helm-do-grep)
   (global-set-key (kbd "C-x S") 'helm-find)
+  (global-set-key (kbd "C-x o") 'other-window)
+  (global-set-key (kbd "C-x O") 'helm-occur)
+  ; these is for entire file system
   (global-set-key (kbd "C-x l") 'helm-locate)
+  (global-set-key (kbd "C-x C-l") 'helm-locate)
+  ; rebind tab to run persistent action
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+  ; make TAB works in terminal
+  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+  ; list actions using C-z
+  (define-key helm-map (kbd "C-z")  'helm-select-action)
 )
 
 (use-package projectile
