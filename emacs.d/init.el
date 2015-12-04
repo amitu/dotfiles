@@ -1,4 +1,5 @@
 (require 'package)
+(add-to-list 'load-path "~/.emacs.d/lisp/")
 (add-to-list 'package-archives
     '("melpa-stable" . "https://stable.melpa.org/packages/") t
 )
@@ -44,6 +45,9 @@
     )
   )
 )
+
+(require 'helm-descbinds)
+(helm-descbinds-mode)
 
 (use-package projectile
   ; docs: http://batsov.com/projectile/

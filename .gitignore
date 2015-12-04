@@ -4,6 +4,6 @@ emacs.d/recentf
 *.eld
 *~
 emacs.d/url
-/emacs.d/places
-/emacs.d/eshell/history
-/emacs.d/tramp
+emacs.d/places
+emacs.d/tramp
+emacs.d/eshell

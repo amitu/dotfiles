@@ -13,6 +13,8 @@ Highlight closing parenthesis.
 saveplace: Saves location of cursor when emacs quits or buffer is
 killed, and when opening the file next it moves to last saved point.
 
+C-h after any key prefix to see what all key bindings are available.
+
 emacs: helm
 -----------
 
