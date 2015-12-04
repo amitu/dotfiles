@@ -72,9 +72,9 @@ s: stage the current file or hunk
 
 Tab: show/hide diff for current file/hunk
 
-C-c C-c c: commit
+c: commit
 
-C-c C-c P: push
+P: push
 
 emacs: show startup time
 ------------------------

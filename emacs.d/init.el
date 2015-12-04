@@ -106,7 +106,6 @@
   (interactive)
   (next-line (- (/ (window-text-height) 2) next-screen-context-lines))
 )
-    
 (defun sfp-page-up ()
   (interactive)
   (previous-line (- (/ (window-text-height) 2) next-screen-context-lines))
