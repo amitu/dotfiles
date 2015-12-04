@@ -23,13 +23,27 @@ names in buffer.
 
 M-x gets helm mode, C-x f gets helm mode, C-x b gets helm mode!
 
+M-y: kill ring helmified.
+
 Buffer mode: @foo will search for all buffers that contain foo.
 
 C-x s: Search in different files.
 
 C-x S: find files.
 
+C-x c b: helm-resume (resume last helm session).
+
+C-u C-x c b: helm-resume-pick which one to resume.
+
 C-x O: helmTAB: temp move to position occur (find patter in this file).
+
+C-h SPACE: mark ring, show all marks, local and global.
+
+C-x c t: helm-top. F4-F1: kill with increasing severity. C-c C-u:
+refresh, M-p: sort by CPU usage, M-C: short by command, M-U: sort by
+user, M-M: short by memory.
+
+C-c C-l: in eshell uses helm over command history.
 
 C-x l: locate, using system locate, searches on all files in system.
 

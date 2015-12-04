@@ -11,6 +11,7 @@
   :config
   (require 'helm)
   (require 'helm-config)
+  (require 'helm-eshell)
   (helm-autoresize-mode t)
   (setq helm-M-x-fuzzy-match t)
   (setq helm-buffers-fuzzy-matching t)
@@ -26,6 +27,7 @@
   (global-set-key (kbd "C-x S") 'helm-find)
   (global-set-key (kbd "C-x o") 'other-window)
   (global-set-key (kbd "C-x O") 'helm-occur)
+  (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
   ; these is for entire file system
   (global-set-key (kbd "C-x l") 'helm-locate)
   (global-set-key (kbd "C-x C-l") 'helm-locate)
@@ -35,6 +37,12 @@
   (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
   ; list actions using C-z
   (define-key helm-map (kbd "C-z")  'helm-select-action)
+
+  (add-hook 'eshell-mode-hook
+    #'(lambda ()
+      (define-key eshell-mode-map (kbd "C-c C-l")  'helm-eshell-history)
+    )
+  )
 )
 
 (use-package projectile
@@ -131,7 +139,7 @@
 (show-paren-mode 1)
 
 ; backups should go to ~/.emacs.d/backups ;; not sure if it works
-(setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
+; (setq backup-directory-alist `(((concat user-emacs-directory "backups"))))
 
 ; show how long it took to load emacs
 ; this must be the last few lines of this file
