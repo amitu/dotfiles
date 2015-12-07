@@ -102,6 +102,14 @@
   (setq save-place-forget-unreadable-files nil)
 )
 
+(use-package guide-key
+  :ensure t
+  :diminish guide-key-mode
+  :config
+  (setq guide-key/guide-key-sequence t)
+  (guide-key-mode 1)
+)
+
 (use-package misc
   :demand t
   :bind ("M-z" . zap-up-to-char)

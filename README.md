@@ -52,6 +52,9 @@ Super-Shift-L: go to last edit.
 
 C-c w: toggle whitespace mode.
 
+Activated guide key mode. Pressing C-x or C-c etc will show a menu after a
+short interval, showing available keys, and the command they are mapped to.
+
 emacs: helm
 -----------
 
