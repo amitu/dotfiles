@@ -29,6 +29,8 @@
   (global-set-key (kbd "C-x o") 'other-window)
   (global-set-key (kbd "C-x O") 'helm-occur)
   (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
+  (global-set-key (kbd "s-b") 'helm-for-files)
+  (global-set-key (kbd "s-x") 'helm-M-x)
   ; these is for entire file system
   (global-set-key (kbd "C-x l") 'helm-locate)
   (global-set-key (kbd "C-x C-l") 'helm-locate)
@@ -56,6 +58,7 @@
   (setq projectile-indexing-method 'alien)
   (setq projectile-completion-system 'helm)
   (setq projectile-enable-caching t)
+  (setq projectile-switch-project-action 'projectile-dired)
   :config
   (projectile-global-mode)
   ; C-u S-f (flush cache, and find file)
@@ -78,11 +81,16 @@
 
 (use-package magit
   :ensure t
+  :config
+  (global-set-key (kbd "C-c s"  ) 'magit-status)
+  (global-set-key (kbd "C-c d"  ) 'magit-diff-unstaged)
+  (global-set-key (kbd "C-c D"  ) 'magit-diff-staged)
+  (global-set-key (kbd "C-c C-d") 'magit-diff)
+  (global-set-key (kbd "s-m") 'magit-status)
+  (global-set-key (kbd "s-d") 'magit-diff-unstaged)
+  (global-set-key (kbd "s-D") 'magit-diff-staged)
+  (global-set-key (kbd "s-e") 'magit-diff)
 )
-(global-set-key (kbd "C-c s"  ) 'magit-status)
-(global-set-key (kbd "C-c d"  ) 'magit-diff-unstaged)
-(global-set-key (kbd "C-c D"  ) 'magit-diff-staged)
-(global-set-key (kbd "C-c C-d") 'magit-diff)
 
 (use-package saveplace
   :ensure t
@@ -143,6 +151,7 @@
   (other-window -1)
 )
 
+; switch window using Super-<left>/<right> keys
 (global-set-key (kbd "s-<right>") 'go-to-next-window)
 (global-set-key (kbd "s-<left>") 'go-to-prev-window)
 

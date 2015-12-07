@@ -38,6 +38,10 @@ Super-left: switch to previous window.
 
 Super-right: switch to next window.
 
+Super-b: Switch buffers.
+
+Super-x: Meta-x.
+
 emacs: helm
 -----------
 
@@ -105,13 +109,14 @@ Command-P, C-c p p: switch projects.
 emacs: magit
 ------------
 
-C-c s: git status.
+C-c s, Super-m: git status.
 
-C-c d: unstaged diff
+C-c d, Super-d: unstaged diff
 
-C-c D: staged diff
+C-c D, Super-D: staged diff
 
-C-c C-d: uncommmitted diff
+C-c C-d, Super-e: uncommmitted diff
+
 
 Magit status major mode:
 
