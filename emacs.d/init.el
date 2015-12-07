@@ -183,9 +183,8 @@
 ; highlight closing parenthesis
 (show-paren-mode 1)
 
-; Ctrl-w replace <-backspace backward="backward" delete="delete"
-; for="for" p="p">; C-w normally deletes whole region now reset to C-x
-; C-k
+; Ctrl-w replace <-backspace backward="backward" delete="delete" for="for"
+; p="p">; C-w normally deletes whole region now reset to C-x C-k
 (global-set-key "\C-w" 'backward-kill-word)
 (global-set-key "\C-x\C-k" 'kill-region)
 (global-set-key "\C-c\C-k" 'kill-region)
@@ -201,9 +200,44 @@
 ; this is needed for pasting
 (global-set-key (kbd "C-c C-k") 'term-char-mode)
 
-; show how long it took to load emacs this must be the last few lines
-; of this file if this goes out of hand
-; http://www.emacswiki.org/emacs/ProfileDotEmacs
+;; Show keystrokes in minibuffer early
+(setq echo-keystrokes 0.1)
+
+; do not blick cursor
+(blink-cursor-mode -1)
+
+(set-fill-column 78)
+(set-face-attribute 'default nil :height 120)
+
+(defun open-line-below ()
+"Open a line below the line the point is at.
+
+Then move to that line and indent accordning to mode"
+  (interactive)
+  (move-end-of-line 1)
+  (newline)
+  (indent-according-to-mode)
+)
+
+(defun open-line-above ()
+"Open a line above the line the point is at.
+
+Then move to that line and indent accordning to mode"
+  (interactive)
+  (move-beginning-of-line 1)
+  (newline)
+  (forward-line -1)
+  (indent-according-to-mode)
+)
+
+(global-set-key (kbd "C-o") 'open-line-below)
+(global-set-key (kbd "C-S-O") 'open-line-above)
+
+;; Show trailing whitespace
+(setq-default show-trailing-whitespace t)
+
+; show how long it took to load emacs this must be the last few lines of this
+; file if this goes out of hand http://www.emacswiki.org/emacs/ProfileDotEmacs
 (fset 'startup-echo-area-message
     #'(lambda ()
           (message "emacs loaded in %s" (emacs-init-time))
