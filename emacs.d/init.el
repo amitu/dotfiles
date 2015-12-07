@@ -96,6 +96,11 @@
   (setq save-place-forget-unreadable-files nil)
 )
 
+(use-package misc
+  :demand t
+  :bind ("M-z" . zap-up-to-char)
+)
+
 (set 'use-package-verbose t)
 
 ;;;;;;;
@@ -252,6 +257,32 @@ beginning of line."
 
 ;; Show trailing whitespace
 (setq-default show-trailing-whitespace t)
+
+;; Prefer utf8
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+
+(defun end-of-line+ (&optional n)
+  "Move cursor to end of current line or end of next line if repeated.
+This is similar to `end-of-line', but:
+  If called interactively with no prefix arg:
+     If the previous command was also `end-of-line+', then move to the
+     end of the next line.  Else, move to the end of the current line.
+  Otherwise, move to the end of the Nth next line (Nth previous line
+     if N<0).  Command `end-of-line', by contrast, moves to the end of
+     the (N-1)th next line."
+  (interactive
+   (list (if current-prefix-arg (prefix-numeric-value current-prefix-arg) 0)))
+  (unless n (setq n 0))                 ; non-interactive with no arg
+  (if (and (eq this-command last-command) (not current-prefix-arg))
+      (forward-line 1)
+    (forward-line n))
+  (let ((inhibit-field-text-motion  t))  (end-of-line)))
+
+(global-set-key (kbd "C-e") 'end-of-line+)
 
 ; show how long it took to load emacs this must be the last few lines of this
 ; file if this goes out of hand http://www.emacswiki.org/emacs/ProfileDotEmacs

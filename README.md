@@ -46,6 +46,8 @@ Ctrl-o/Ctrl-Shift-o: works as expected (open a line below/above).
 
 Ctrl-a: works as expected (beginning of indentation or line).
 
+Ctrl-e: end of current line, and subsequent ones when repeated.
+
 Super-Shift-L: go to last edit.
 
 emacs: helm
