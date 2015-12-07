@@ -9,6 +9,7 @@
 
 (use-package helm
   :ensure t
+  :diminish (helm-mode)
   :config
   (require 'helm)
   (require 'helm-config)
@@ -110,6 +111,13 @@
   (guide-key-mode 1)
 )
 
+(use-package git-gutter+
+  :ensure nil
+  :init (global-git-gutter+-mode)
+  :config
+  :diminish (git-gutter+-mode)
+)
+
 (use-package misc
   :demand t
   :bind ("M-z" . zap-up-to-char)
@@ -128,7 +136,6 @@
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; no acceleration
 (setq mouse-wheel-follow-mouse 't) ;; scroll the right window
-
 
 ; Ctrl-up/down will scroll but will keep focus in same line
 (defun gcm-scroll-down ()
