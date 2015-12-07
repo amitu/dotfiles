@@ -42,8 +42,11 @@ Super-b: Switch buffers.
 
 Super-x: Meta-x.
 
-
 Ctrl-o/Ctrl-Shift-o: works as expected (open a line below/above).
+
+Ctrl-a: works as expected (beginning of indentation or line).
+
+Super-Shift-L: go to last edit.
 
 emacs: helm
 -----------
@@ -59,7 +62,7 @@ M-y: kill ring helmified.
 
 Buffer mode: @foo will search for all buffers that contain foo.
 
-C-x s: Search in different files.
+Super-g, C-x s: Search in different files.
 
 C-x S: find files.
 
@@ -69,7 +72,7 @@ C-u C-x c b: helm-resume-pick which one to resume.
 
 C-x O: helmTAB: temp move to position occur (find patter in this file).
 
-C-h SPACE: mark ring, show all marks, local and global.
+Super-Shift-SPACE, C-h SPACE: mark ring, show all marks, local and global.
 
 C-x c t: helm-top. F4-F1: kill with increasing severity. C-c C-u:
 refresh, M-p: sort by CPU usage, M-C: short by command, M-U: sort by

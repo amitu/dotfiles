@@ -25,10 +25,12 @@
   (global-set-key (kbd "C-x f") 'helm-find-files)
   (global-set-key (kbd "C-x C-f") 'helm-find-files)
   (global-set-key (kbd "C-x s") 'helm-do-grep)
+  (global-set-key (kbd "s-g") 'helm-do-grep)
   (global-set-key (kbd "C-x S") 'helm-find)
   (global-set-key (kbd "C-x o") 'other-window)
   (global-set-key (kbd "C-x O") 'helm-occur)
   (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
+  (global-set-key (kbd "s-SPC") 'helm-all-mark-rings)
   (global-set-key (kbd "s-b") 'helm-for-files)
   (global-set-key (kbd "s-x") 'helm-M-x)
   ; these is for entire file system
@@ -58,20 +60,15 @@
   (setq projectile-indexing-method 'alien)
   (setq projectile-completion-system 'helm)
   (setq projectile-enable-caching t)
-  (setq projectile-switch-project-action 'projectile-dired)
   :config
   (projectile-global-mode)
   ; C-u S-f (flush cache, and find file)
   (define-key projectile-mode-map [?\s-f] 'projectile-find-file)
   (define-key projectile-mode-map (kbd "C-c f") 'projectile-find-file)
-  ; keybindings:
-  ; - TODO: kill list of projects
-
-  ; https://github.com/nex3/perspective-el
+  (define-key projectile-mode-map [?\s-g] 'projectile-grep)
+  (global-set-key (kbd "s-p") 'projectile-switch-project)
+  (global-set-key (kbd "C-c p p") 'projectile-switch-project)
 )
-
-(global-set-key [?\s-p] 'projectile-switch-project)
-(global-set-key (kbd "C-c p p") 'projectile-switch-project)
 
 (use-package helm-projectile
   :ensure t
@@ -232,6 +229,26 @@ Then move to that line and indent accordning to mode"
 
 (global-set-key (kbd "C-o") 'open-line-below)
 (global-set-key (kbd "C-S-O") 'open-line-above)
+
+(defun back-to-indentation-or-beginning-of-line ()
+  "Moves point back to indentation if there is any non blank
+characters to the left of the cursor.  Otherwise point moves to
+beginning of line."
+  (interactive)
+  (if (= (point) (save-excursion (back-to-indentation) (point)))
+    (beginning-of-line)
+    (back-to-indentation)
+  )
+)
+(global-set-key (kbd "C-a") 'back-to-indentation-or-beginning-of-line)
+
+(defun goto-last-change ()
+  (interactive)
+  (let ( (mypos (car (cadr buffer-undo-list))) )
+     (if mypos (goto-char mypos))
+  )
+)
+(global-set-key (kbd "s-L") 'goto-last-change)
 
 ;; Show trailing whitespace
 (setq-default show-trailing-whitespace t)
