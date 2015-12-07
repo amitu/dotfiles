@@ -132,6 +132,21 @@
   :diminish (git-gutter+-mode)
 )
 
+(use-package elfeed
+  :ensure t
+  :config
+  (setq elfeed-feeds
+    '(
+      "http://nullprogram.com/feed/"
+      "http://www.terminally-incoherent.com/blog/feed/"
+      "http://xkcd.com/rss.xml"
+    )
+  )
+  (setf url-queue-timeout 30)
+  :init
+  (global-set-key (kbd "C-x w") 'elfeed)
+)
+
 (use-package misc
   :demand t
   :bind ("M-z" . zap-up-to-char)
@@ -213,6 +228,9 @@
 
 ; Disable file backup
 (setq make-backup-files nil)
+
+; sentences end in single space
+(setq sentence-end-double-space nil)
 
 ; require final newline
 (setq require-final-newline t)

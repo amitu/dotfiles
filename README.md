@@ -1,6 +1,29 @@
 Features | Change log
 =====================
 
+emacs: elfeed, read RSS feed
+----------------------------
+
+C-x w: open feed reader.
+
+g: refresh list (hide read ones)
+
+G: update from server
+
+s: update search field.
+
+b: open selected entry in browser.
+
+y: copy url.
+
+r: mark entry read
+
+u: makr entry unread
+
++: add tag
+
+-: remove tag
+
 emacs: multi-term
 -----------------
 
