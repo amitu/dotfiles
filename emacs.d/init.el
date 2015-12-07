@@ -111,9 +111,16 @@
   (guide-key-mode 1)
 )
 
+(defun my-git-gutter-refresh ()
+  (interactive)
+  (git-gutter+-refresh)
+)
+
 (use-package git-gutter+
   :ensure nil
-  :init (global-git-gutter+-mode)
+  :init
+  (global-git-gutter+-mode)
+  (global-set-key (kbd "C-c r") 'my-git-gutter-refresh)
   :config
   :diminish (git-gutter+-mode)
 )
