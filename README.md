@@ -42,6 +42,7 @@ Super-b: Switch buffers.
 
 Super-x: Meta-x.
 
+
 Ctrl-o/Ctrl-Shift-o: works as expected (open a line below/above).
 
 emacs: helm
