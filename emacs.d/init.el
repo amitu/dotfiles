@@ -113,7 +113,14 @@
 
 (defun my-git-gutter-refresh ()
   (interactive)
-  (git-gutter+-refresh)
+  (mapc
+    (lambda (buffer)
+      (with-current-buffer buffer
+        (git-gutter+-refresh)
+      )
+    )
+    (buffer-list)
+  )
 )
 
 (use-package git-gutter+

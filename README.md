@@ -132,6 +132,7 @@ C-c D, Super-D: staged diff
 
 C-c C-d, Super-e: uncommmitted diff
 
+C-c r: refresh gutter for git stuff, if it does not auto refresh.
 
 Magit status major mode:
 
