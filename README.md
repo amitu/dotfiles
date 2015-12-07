@@ -50,6 +50,8 @@ Ctrl-e: end of current line, and subsequent ones when repeated.
 
 Super-Shift-L: go to last edit.
 
+C-c w: toggle whitespace mode.
+
 emacs: helm
 -----------
 
@@ -81,6 +83,8 @@ refresh, M-p: sort by CPU usage, M-C: short by command, M-U: sort by
 user, M-M: short by memory.
 
 C-c C-l: in eshell uses helm over command history.
+
+Super-i: imenu!
 
 C-x l: locate, using system locate, searches on all files in system.
 

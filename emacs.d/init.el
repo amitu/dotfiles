@@ -33,6 +33,7 @@
   (global-set-key (kbd "s-SPC") 'helm-all-mark-rings)
   (global-set-key (kbd "s-b") 'helm-for-files)
   (global-set-key (kbd "s-x") 'helm-M-x)
+  (global-set-key (kbd "s-i") 'helm-imenu)
   ; these is for entire file system
   (global-set-key (kbd "C-x l") 'helm-locate)
   (global-set-key (kbd "C-x C-l") 'helm-locate)
@@ -56,11 +57,15 @@
 (use-package projectile
   ; docs: http://batsov.com/projectile/
   :ensure t
+
   :init
+
   (setq projectile-indexing-method 'alien)
   (setq projectile-completion-system 'helm)
   (setq projectile-enable-caching t)
+
   :config
+
   (projectile-global-mode)
   ; C-u S-f (flush cache, and find file)
   (define-key projectile-mode-map [?\s-f] 'projectile-find-file)
@@ -74,6 +79,7 @@
   :ensure t
   :config
   (helm-projectile-on)
+  (setq projectile-switch-project-action 'projectile-dired)
 )
 
 (use-package magit
@@ -205,10 +211,13 @@
 ;; Show keystrokes in minibuffer early
 (setq echo-keystrokes 0.1)
 
+; whitespace mode
+(global-set-key (kbd "C-c w") 'whitespace-mode)
+
 ; do not blick cursor
 (blink-cursor-mode -1)
 
-(set-fill-column 78)
+(setq-default fill-column 78)
 (set-face-attribute 'default nil :height 120)
 
 (defun open-line-below ()
