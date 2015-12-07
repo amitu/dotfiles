@@ -133,8 +133,40 @@
 (global-set-key [(meta down)] 'sfp-page-down)
 (global-set-key [(meta up)] 'sfp-page-up)
 
+; Super-<left>/<right> should switch window
+(defun go-to-next-window ()
+  (interactive)
+  (other-window 1)
+)
+(defun go-to-prev-window ()
+  (interactive)
+  (other-window -1)
+)
+
+(global-set-key (kbd "s-<right>") 'go-to-next-window)
+(global-set-key (kbd "s-<left>") 'go-to-prev-window)
+
 ; no toolbar
 (tool-bar-mode -1)
+
+; no scrollbar
+(scroll-bar-mode -1)
+
+; if something is highlighted and you start typing, it overwrites
+; highlighted text
+(delete-selection-mode t)
+
+; Make y and yes both work
+(fset 'yes-or-no-p 'y-or-n-p)
+
+; Use spaces instead of tabs
+(setq-default indent-tabs-mode nil)
+
+; Spaces instead tabs
+(setq default-tab-width 4)
+
+; Disable file backup
+(setq make-backup-files nil)
 
 ; require final newline
 (setq require-final-newline t)
@@ -142,12 +174,27 @@
 ; highlight closing parenthesis
 (show-paren-mode 1)
 
-; backups should go to ~/.emacs.d/backups ;; not sure if it works
-; (setq backup-directory-alist `(((concat user-emacs-directory "backups"))))
+; Ctrl-w replace <-backspace backward="backward" delete="delete"
+; for="for" p="p">; C-w normally deletes whole region now reset to C-x
+; C-k
+(global-set-key "\C-w" 'backward-kill-word)
+(global-set-key "\C-x\C-k" 'kill-region)
+(global-set-key "\C-c\C-k" 'kill-region)
 
-; show how long it took to load emacs
-; this must be the last few lines of this file
-; if this goes out of hand http://www.emacswiki.org/emacs/ProfileDotEmacs
+(require 'multi-term)
+(global-set-key (kbd "C-c t") 'multi-term-next)
+(global-set-key (kbd "C-c C-t") 'multi-term)
+(global-set-key (kbd "S-s-<right>") 'multi-term-next)
+(global-set-key (kbd "S-s-<left>") 'multi-term-next)
+
+; line mode is for normal editing command
+(global-set-key (kbd "C-c C-j") 'term-line-mode)
+; this is needed for pasting
+(global-set-key (kbd "C-c C-k") 'term-char-mode)
+
+; show how long it took to load emacs this must be the last few lines
+; of this file if this goes out of hand
+; http://www.emacswiki.org/emacs/ProfileDotEmacs
 (fset 'startup-echo-area-message
     #'(lambda ()
           (message "emacs loaded in %s" (emacs-init-time))

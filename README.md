@@ -1,6 +1,25 @@
 Features | Change log
 =====================
 
+emacs: multi-term
+-----------------
+
+Added multi-term, for now invoke it using M-x multi-term.
+
+C-c t, Super-Shift-left, Super-Shift-right: switch to next terminal
+
+C-c C-t: create a new terminal
+
+C-c C-j: line mode, this is where you want to be 90% of times (C-c C-c sends
+C-c).
+
+C-c C-k: char mode, this is needed for pasting things.
+
+This as of now is quite dangerous, rm -rf ~/projects/ then paste tmp, and it
+will show "rm -rf ~/projects/tmp" but will actually execute "rm -rf
+~/projects".
+
+
 emacs minor stuff
 ------------------
 
@@ -10,10 +29,14 @@ Backups are stored in ~/.emacs.d/backups.
 
 Highlight closing parenthesis.
 
-saveplace: Saves location of cursor when emacs quits or buffer is
-killed, and when opening the file next it moves to last saved point.
+saveplace: Saves location of cursor when emacs quits or buffer is killed, and
+when opening the file next it moves to last saved point.
 
 C-h after any key prefix to see what all key bindings are available.
+
+Super-left: switch to previous window.
+
+Super-right: switch to next window.
 
 emacs: helm
 -----------

@@ -47,4 +47,4 @@ brew:
 	brew install redis
 	brew install go node python
 	bre install emacs macvim
-	brew cask install iterm2 google-chrome firefox vlc flux
+	brew cask install iterm2 google-chrome firefox vlc flux utorrent
