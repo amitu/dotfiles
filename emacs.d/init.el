@@ -30,6 +30,7 @@
   (global-set-key (kbd "C-x S") 'helm-find)
   (global-set-key (kbd "C-x o") 'other-window)
   (global-set-key (kbd "C-x O") 'helm-occur)
+  (global-set-key (kbd "s-o") 'helm-occur)
   (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
   (global-set-key (kbd "s-SPC") 'helm-all-mark-rings)
   (global-set-key (kbd "s-b") 'helm-for-files)
@@ -111,7 +112,7 @@
   (guide-key-mode 1)
 )
 
-(defun my-git-gutter-refresh ()
+(defun my/git-gutter-refresh ()
   (interactive)
   (mapc
     (lambda (buffer)
@@ -127,8 +128,7 @@
   :ensure nil
   :init
   (global-git-gutter+-mode)
-  (global-set-key (kbd "C-c r") 'my-git-gutter-refresh)
-  :config
+  (global-set-key (kbd "C-c r") 'my/git-gutter-refresh)
   :diminish (git-gutter+-mode)
 )
 
@@ -147,9 +147,11 @@
   (global-set-key (kbd "C-x w") 'elfeed)
 )
 
-(use-package misc
-  :demand t
-  :bind ("M-z" . zap-up-to-char)
+(use-package markdown-mode
+  :ensure t
+  :defer t
+  :commands 'markdown-mode
+  :mode "\\.markdown\\'" "\\.md\\'"
 )
 
 (set 'use-package-verbose t)
@@ -261,10 +263,24 @@
 ; whitespace mode
 (global-set-key (kbd "C-c w") 'whitespace-mode)
 
+;; Show trailing whitespace
+(setq-default show-trailing-whitespace t)
+
+;; remove trailing whitepsace
+(global-set-key (kbd "C-c W") 'delete-trailing-whitespace)
+
+(require 'fill-column-indicator)
+(add-hook 'after-change-major-mode-hook 'fci-mode)
+
 ; do not blick cursor
 (blink-cursor-mode -1)
 
-(setq-default fill-column 78)
+; show human readable sizes in dired
+(setq-default dired-listing-switches "-alhv")
+
+
+
+(setq-default fill-column 80)
 (set-face-attribute 'default nil :height 120)
 
 (defun open-line-below ()
@@ -311,9 +327,6 @@ beginning of line."
 )
 (global-set-key (kbd "s-L") 'goto-last-change)
 
-;; Show trailing whitespace
-(setq-default show-trailing-whitespace t)
-
 ;; Prefer utf8
 (setq locale-coding-system 'utf-8)
 (set-terminal-coding-system 'utf-8)
@@ -339,6 +352,14 @@ This is similar to `end-of-line', but:
   (let ((inhibit-field-text-motion  t))  (end-of-line)))
 
 (global-set-key (kbd "C-e") 'end-of-line+)
+
+(defun switch-to-previous-buffer ()
+  "Switch to previously open buffer.
+Repeated invocations toggle between the two most recently open buffers."
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer) 1)))
+
+(global-set-key (kbd "C-c b") 'switch-to-previous-buffer)
 
 ; show how long it took to load emacs this must be the last few lines of this
 ; file if this goes out of hand http://www.emacswiki.org/emacs/ProfileDotEmacs
