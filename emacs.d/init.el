@@ -1,4 +1,8 @@
 (require 'package)
+
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (add-to-list 'package-archives
     '("melpa-stable" . "https://stable.melpa.org/packages/") t
@@ -159,6 +163,10 @@
 ;;;;;;;
 ;;;;;;; User Customizations
 ;;;;;;;
+
+;; terminal notifier
+(require 'terminal-notifier)
+; (tn-notify "Ahoy, message!" "Whoa there, title!" "Yo, subtitle!")
 
 ; highlight current line globabbly
 (global-hl-line-mode)
