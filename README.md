@@ -12,7 +12,8 @@ Hyper-i: list all available snippets for this mode.
 
 Hyper-I: list all snippets and their keys etc.
 
-Hyper-k: kill other window's buffer.
+Hyper-k: kill other window's buffer (without killing other window, for getting
+rid of temporary output buffers opened by some commands).
 
 Autocompletion is still M-/.
 

@@ -188,7 +188,7 @@
   :defer t
   :diminish yas-minor-mode
   :commands (yas-global-mode yas-minor-mode)
-  :init
+  :config
   ; personal snippets go here
   (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
   ; snippets that are part of yas snippet repo
@@ -196,7 +196,6 @@
   ; remember to call (yas-reload-all) when modifying snippets
   (add-to-list 'yas-prompt-functions 'shk-yas/helm-prompt)
   ; (setq yas-verbosity 1)
-  :config
   (require 'yasnippet)
   (global-set-key (kbd "H-i") 'yas-insert-snippet)
   (global-set-key (kbd "H-I") 'yas-describe-tables)
@@ -210,7 +209,7 @@
 ;;;;;;;
 
 ;; htmlize
-((autoload 'htmlize-buffer "htmlize" "HTMLize current buffer" t)
+(autoload 'htmlize-buffer "htmlize" "HTMLize current buffer" t)
 (autoload 'htmlize-file "htmlize" "HTMLize a file" t)
 (autoload 'htmlize-region "htmlize" "HTMLize current region" t)
 
@@ -270,11 +269,11 @@
 (global-set-key (kbd "s-<right>") 'go-to-next-window)
 (global-set-key (kbd "s-<left>") 'go-to-prev-window)
 
-; no toolbar
-(tool-bar-mode -1)
-
-; no scrollbar
-(scroll-bar-mode -1)
+(mapc
+ (lambda (mode)
+   (when (fboundp mode)
+     (funcall mode -1)))
+ '(menu-bar-mode tool-bar-mode scroll-bar-mode))
 
 ; if something is highlighted and you start typing, it overwrites
 ; highlighted text

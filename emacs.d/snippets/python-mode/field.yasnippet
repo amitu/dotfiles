@@ -1,0 +1,14 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: field
+# key: f
+# contributor: Thejaswi Puthraya <thejaswi.puthraya@gmail.com>
+# group: model
+# --
+$1 = models.${2:$$(yas/choose-value (list "AutoField()" "BooleanField()" "CharField(max_length=255)"
+                                      "CommaSeparatedIntegerField()" "DateField()" "DateTimeField()" 
+				      "DecimalField()" "EmailField()" "FileField()" "FilePathField()" 
+				      "FloatField()" "ImageField()" "IntegerField()" "IPAddressField()"
+				      "NullBooleanField()" "PositiveIntegerField()" "PositiveSmallIntegerField()"
+				      "SlugField()" "SmallIntegerField()" "TextField()" "TimeField()"
+				      "URLField()" "XMLField()" "ForeignKey()" "ManyToManyField()"
+				      "OneToOneField()"))}$0
