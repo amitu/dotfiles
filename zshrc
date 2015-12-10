@@ -1,3 +1,5 @@
+# -*- mode: shell-script -*-
+
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/amitu/.oh-my-zsh
 
@@ -32,8 +34,9 @@ plugins=(git virtualenvwrapper)
 # User configuration
 
 export CDPATH=~:~/projects:~/coverfox
+export EDITOR="emacsclient -nw"
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin/"
 source $ZSH/oh-my-zsh.sh
 source /usr/local/bin/virtualenvwrapper.sh
 

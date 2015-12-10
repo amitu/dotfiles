@@ -1,7 +1,10 @@
 (require 'package)
 
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-(setq exec-path (append exec-path '("/usr/local/bin")))
+;; fn key becomes hyper key
+(setq ns-function-modifier 'hyper)
+
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin:/Library/TeX/texbin/"))
+(setq exec-path (append exec-path '("/usr/local/bin" "/Library/TeX/texbin/")))
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (add-to-list 'package-archives
@@ -18,11 +21,13 @@
   (require 'helm)
   (require 'helm-config)
   (require 'helm-eshell)
+  (require 'helm-descbinds)
   (helm-autoresize-mode t)
   (setq helm-M-x-fuzzy-match t)
   (setq helm-buffers-fuzzy-matching t)
   (setq helm-recentf-fuzzy-match t)
   (helm-mode 1)
+  (helm-descbinds-mode)
   (global-set-key (kbd "M-x") 'helm-M-x)
   (global-set-key (kbd "M-y") 'helm-show-kill-ring)
   (global-set-key (kbd "C-x b") 'helm-for-files)
@@ -43,6 +48,7 @@
   ; these is for entire file system
   (global-set-key (kbd "C-x l") 'helm-locate)
   (global-set-key (kbd "C-x C-l") 'helm-locate)
+  (global-set-key (kbd "H-l") 'helm-locate)
   ; rebind tab to run persistent action
   (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
   ; make TAB works in terminal
@@ -56,9 +62,6 @@
     )
   )
 )
-
-(require 'helm-descbinds)
-(helm-descbinds-mode)
 
 (use-package projectile
   ; docs: http://batsov.com/projectile/
@@ -126,6 +129,7 @@
     )
     (buffer-list)
   )
+  (message "done") ;; to ignore errors
 )
 
 (use-package git-gutter+
@@ -138,16 +142,17 @@
 
 (use-package elfeed
   :ensure t
-  :config
+  :init
   (setq elfeed-feeds
     '(
       "http://nullprogram.com/feed/"
       "http://www.terminally-incoherent.com/blog/feed/"
       "http://xkcd.com/rss.xml"
+      "http://sachachua.com/blog/category/visual-book-notes/feed/"
     )
   )
   (setf url-queue-timeout 30)
-  :init
+  :config
   (global-set-key (kbd "C-x w") 'elfeed)
 )
 
@@ -156,6 +161,46 @@
   :defer t
   :commands 'markdown-mode
   :mode "\\.markdown\\'" "\\.md\\'"
+  )
+
+(defun shk-yas/helm-prompt (prompt choices &optional display-fn)
+  "Use helm to select a snippet. Put this into `yas/prompt-functions.'"
+  (interactive)
+  (setq display-fn (or display-fn 'identity))
+  (if (require 'helm-config)
+      (let (tmpsource cands result rmap)
+        (setq cands (mapcar (lambda (x) (funcall display-fn x)) choices))
+        (setq rmap (mapcar (lambda (x) (cons (funcall display-fn x) x)) choices))
+        (setq tmpsource
+              (list
+               (cons 'name prompt)
+               (cons 'candidates cands)
+               '(action . (("Expand" . (lambda (selection) selection))))
+               ))
+        (setq result (helm-other-buffer '(tmpsource) "*helm-select-yasnippet"))
+        (if (null result)
+            (signal 'quit "user quit!")
+          (cdr (assoc result rmap))))
+    nil))
+
+(use-package yasnippet
+  :ensure t
+  :defer t
+  :diminish yas-minor-mode
+  :commands (yas-global-mode yas-minor-mode)
+  :init
+  ; personal snippets go here
+  (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
+  ; snippets that are part of yas snippet repo
+  (add-to-list 'yas-snippet-dirs "~/.emacs.d/ysnippets")
+  ; remember to call (yas-reload-all) when modifying snippets
+  (add-to-list 'yas-prompt-functions 'shk-yas/helm-prompt)
+  ; (setq yas-verbosity 1)
+  :config
+  (require 'yasnippet)
+  (global-set-key (kbd "H-i") 'yas-insert-snippet)
+  (global-set-key (kbd "H-I") 'yas-describe-tables)
+  (yas-global-mode 1)
 )
 
 (set 'use-package-verbose t)
@@ -164,15 +209,23 @@
 ;;;;;;; User Customizations
 ;;;;;;;
 
+;; htmlize
+((autoload 'htmlize-buffer "htmlize" "HTMLize current buffer" t)
+(autoload 'htmlize-file "htmlize" "HTMLize a file" t)
+(autoload 'htmlize-region "htmlize" "HTMLize current region" t)
+
 ;; terminal notifier
-(require 'terminal-notifier)
-; (tn-notify "Ahoy, message!" "Whoa there, title!" "Yo, subtitle!")
+(autoload 'tn-notify "terminal-notifier" "Alert on Desktop" t)
+;; (tn-notify "Ahoy, message!" "Whoa there, title!" "Yo, subtitle!")
+
+;; typing game
+(autoload 'typing-of-emacs "typing" "The Typing Of Emacs, a game." t)
 
 ; highlight current line globabbly
 (global-hl-line-mode)
 
 ; fix scrolling behaviour
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-scroll-amount '(3 ((shift) . 1))) ;; one line at a time
 (setq mouse-wheel-progressive-speed nil) ;; no acceleration
 (setq mouse-wheel-follow-mouse 't) ;; scroll the right window
 
@@ -289,7 +342,8 @@
 
 
 (setq-default fill-column 80)
-(set-face-attribute 'default nil :height 120)
+(set-face-attribute 'default nil :height 120) ; font size
+;; (set-face-attribute 'default nil :height 200) ; large font size
 
 (defun open-line-below ()
 "Open a line below the line the point is at.
@@ -368,6 +422,34 @@ Repeated invocations toggle between the two most recently open buffers."
   (switch-to-buffer (other-buffer (current-buffer) 1)))
 
 (global-set-key (kbd "C-c b") 'switch-to-previous-buffer)
+
+(global-set-key (kbd "M-j")
+  (lambda ()
+    (interactive)
+    (join-line -1)
+  )
+)
+
+;; http://whattheemacsd.com/setup-magit.el-01.html
+;; START: full screen magit-status
+
+(defadvice magit-status (around magit-fullscreen activate)
+  (window-configuration-to-register :magit-fullscreen)
+  ad-do-it
+  (delete-other-windows))
+
+(defun magit-quit-session ()
+  "Restores the previous window configuration and kills the magit buffer"
+  (interactive)
+  (kill-buffer)
+  (jump-to-register :magit-fullscreen))
+
+(define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
+;; END
+
+(global-set-key (kbd "H-k") (lambda ()
+                              (interactive)
+                              (kill-buffer (window-buffer (next-window)))))
 
 ; show how long it took to load emacs this must be the last few lines of this
 ; file if this goes out of hand http://www.emacswiki.org/emacs/ProfileDotEmacs

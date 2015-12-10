@@ -1,6 +1,27 @@
 Features | Change log
 =====================
 
+emacs: yasnippets
+-----------------
+
+Imported
+[yasnippets-snippets](https://github.com/AndreaCrotti/yasnippet-snippets) as
+git submodule.
+
+Hyper-i: list all available snippets for this mode.
+
+Hyper-I: list all snippets and their keys etc.
+
+Hyper-k: kill other window's buffer.
+
+Autocompletion is still M-/.
+
+emacs: hyper
+------------
+
+fn key on mac now becomes hyper key for emacs. Some binds are being added to it
+eg H-l: helm-locate.
+
 emacs: elfeed, read RSS feed
 ----------------------------
 
@@ -79,6 +100,10 @@ Activated guide key mode. Pressing C-x or C-c etc will show a menu after a
 short interval, showing available keys, and the command they are mapped to.
 
 C-c b: swith to previous buffer.
+
+M-j: join next line with the current one
+
+Added htmlize package. No keyboard shortcuts, activte using M-x html...
 
 emacs: helm
 -----------
