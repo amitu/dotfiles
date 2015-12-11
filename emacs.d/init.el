@@ -9,6 +9,11 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (add-to-list 'load-path "~/lisp/")
 
+;; brew install coreutils for mac.
+(require 'ls-lisp)
+(setq ls-lisp-use-insert-directory-program t)
+(setq insert-directory-program "gls")
+
 (add-to-list 'package-archives
     '("melpa-stable" . "https://stable.melpa.org/packages/") t
 )
