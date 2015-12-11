@@ -10,6 +10,8 @@
 (add-to-list 'load-path "~/lisp/")
 
 ;; brew install coreutils for mac.
+;; coreutils contains posix compliant versions of core utilities, eg ls
+;; dired needs compliant version of ls.
 (when (executable-find "gls")
   (require 'ls-lisp)
   (setq ls-lisp-use-insert-directory-program t)
@@ -28,14 +30,6 @@
   :diminish (company-mode)
   :config
   (add-hook 'after-init-hook 'global-company-mode)
-
-  (use-package company-quickhelp
-    :ensure t
-    :init
-    (setq company-quickhelp-delay nil)
-    :config
-    (company-quickhelp-mode 1)
-  )
 
   (autoload 'helm-company "helm-company")
   (define-key company-mode-map (kbd "C-:") 'helm-company)
@@ -239,6 +233,16 @@
 
 (set 'use-package-verbose t)
 
+;; python-mode is added as a submodule
+
+(setq py-install-directory "~/.emacs.d/python-mode")
+(add-to-list 'load-path py-install-directory)
+(require 'python-mode)
+
+(autoload 'python-mode "python-mode" "Python Mode." t)
+(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+(add-to-list 'interpreter-mode-alist '("python" . python-mode))
+
 ;;;;;;;
 ;;;;;;; User Customizations
 ;;;;;;;
@@ -259,7 +263,7 @@
 (global-hl-line-mode)
 
 ;; auto save session every desktop-auto-save-timeout=30 seconds.
-(desktop-save-mode 1)
+(desktop-save-mode nil)
 
 ; fix scrolling behaviour
 (setq mouse-wheel-scroll-amount '(3 ((shift) . 1))) ;; one line at a time

@@ -33,7 +33,7 @@ plugins=(git virtualenvwrapper)
 
 # User configuration
 
-export CDPATH=~:~/projects:~/coverfox
+export CDPATH=~:~/projects:~/coverfox:.
 export EDITOR="emacsclient -nw"
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin/"
