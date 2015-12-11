@@ -7,12 +7,33 @@
 (setq exec-path (append exec-path '("/usr/local/bin" "/Library/TeX/texbin/")))
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
+(add-to-list 'load-path "~/lisp/")
+
 (add-to-list 'package-archives
     '("melpa-stable" . "https://stable.melpa.org/packages/") t
 )
 (package-initialize)
 
 (require 'use-package)
+
+(use-package company
+  :ensure t
+  :diminish (company-mode)
+  :config
+  (add-hook 'after-init-hook 'global-company-mode)
+
+  (use-package company-quickhelp
+    :ensure t
+    :init
+    (setq company-quickhelp-delay nil)
+    :config
+    (company-quickhelp-mode 1)
+  )
+
+  (autoload 'helm-company "helm-company")
+  (define-key company-mode-map (kbd "C-:") 'helm-company)
+  (define-key company-active-map (kbd "C-:") 'helm-company)
+)
 
 (use-package helm
   :ensure t
@@ -449,6 +470,8 @@ Repeated invocations toggle between the two most recently open buffers."
 (global-set-key (kbd "H-k") (lambda ()
                               (interactive)
                               (kill-buffer (window-buffer (next-window)))))
+
+(require 'work-init)
 
 ; show how long it took to load emacs this must be the last few lines of this
 ; file if this goes out of hand http://www.emacswiki.org/emacs/ProfileDotEmacs
