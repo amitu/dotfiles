@@ -10,9 +10,11 @@
 (add-to-list 'load-path "~/lisp/")
 
 ;; brew install coreutils for mac.
-(require 'ls-lisp)
-(setq ls-lisp-use-insert-directory-program t)
-(setq insert-directory-program "gls")
+(when (executable-find "gls")
+  (require 'ls-lisp)
+  (setq ls-lisp-use-insert-directory-program t)
+  (setq insert-directory-program "gls")
+)
 
 (add-to-list 'package-archives
     '("melpa-stable" . "https://stable.melpa.org/packages/") t
@@ -232,7 +234,7 @@
   :ensure t
   :config
   (require 'color-theme-sanityinc-tomorrow)
-  (color-theme-sanityinc-tomorrow-day)
+  ;; (color-theme-sanityinc-tomorrow-day)
 )
 
 (set 'use-package-verbose t)
@@ -534,7 +536,7 @@ same as eshell/x."
    [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector
    (vector "#4d4d4c" "#c82829" "#718c00" "#eab700" "#4271ae" "#8959a8" "#3e999f" "#ffffff"))
- '(custom-enabled-themes (quote (sanityinc-tomorrow-night)))
+ '(custom-enabled-themes (quote (sanityinc-tomorrow-day)))
  '(custom-safe-themes
    (quote
     ("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default)))
