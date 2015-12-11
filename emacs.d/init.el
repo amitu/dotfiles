@@ -25,16 +25,51 @@
 
 (require 'use-package)
 
+(defun my/python-mode-hook ()
+  (add-to-list 'company-backends 'company-jedi))
+
 (use-package company
   :ensure t
   :diminish (company-mode)
   :config
-  (add-hook 'after-init-hook 'global-company-mode)
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 0)
+  (setq company-dabbrev-ignore-case t)
+  (setq company-dabbrev-code-ignore-case t)
+  (setq company-dabbrev-downcase nil)
+  (setq company-dabbrev-other-buffers 'all)
+  (setq company-dabbrev-code-other-buffers 'all)
+  (setq company-dabbrev-code-everywhere t)
+  (global-company-mode)
 
   (autoload 'helm-company "helm-company")
   (define-key company-mode-map (kbd "C-:") 'helm-company)
   (define-key company-active-map (kbd "C-:") 'helm-company)
+
+  (use-package company-jedi
+    :ensure t
+    :config
+    (setq jedi:complete-on-dot t)
+    (add-hook 'python-mode-hook 'my/python-mode-hook)
+  )
 )
+
+(defun do-yas-expand ()
+  (let ((yas/fallback-behavior 'return-nil))
+    (yas/expand)))
+
+(defun tab-indent-or-complete ()
+  (interactive)
+  (if (minibufferp)
+      (minibuffer-complete)
+    (if (or (not yas/minor-mode)
+            (null (do-yas-expand)))
+        (helm-company)
+    )
+  )
+)
+
+(define-key prog-mode-map [tab] 'tab-indent-or-complete)
 
 (use-package helm
   :ensure t
@@ -126,6 +161,17 @@
   (global-set-key (kbd "s-e") 'magit-diff)
 )
 
+(use-package deft
+  :ensure t
+  :init
+  (setq deft-extensions '("txt" "tex" "org")
+  (setq deft-directory "~/Dropbox/org")
+  (setq deft-recursive t)
+  :config
+  (autoload 'deft "deft" "Deft Mode" t)
+  (global-set-key (kbd "H-d") 'deft)
+)
+
 (use-package saveplace
   :ensure t
   :init
@@ -171,6 +217,7 @@
       "http://www.terminally-incoherent.com/blog/feed/"
       "http://xkcd.com/rss.xml"
       "http://sachachua.com/blog/category/visual-book-notes/feed/"
+      "http://www.sciencedaily.com/rss/top/science.xml"
     )
   )
   (setf url-queue-timeout 30)
@@ -513,14 +560,6 @@ directory to make multiple eshell windows easier."
 
 (global-set-key (kbd "C-!") 'eshell-here)
 
-(defun eshell/x ()
-  "Quit shell. Not bound to anything because typing x in shell is
-same as eshell/x."
-  (insert "exit")
-  (eshell-send-input)
-  (delete-window)
-)
-
 (require 'work-init)
 
 ; show how long it took to load emacs this must be the last few lines of this
@@ -543,7 +582,9 @@ same as eshell/x."
  '(custom-enabled-themes (quote (sanityinc-tomorrow-day)))
  '(custom-safe-themes
    (quote
-    ("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default)))
+    ("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a"
+     "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58"
+     default)))
  '(fci-rule-color "#d6d6d6")
  '(safe-local-variable-values
    (quote
