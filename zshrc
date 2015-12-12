@@ -29,7 +29,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git virtualenvwrapper)
+plugins=(git)
 
 # User configuration
 
@@ -38,7 +38,6 @@ export EDITOR="emacsclient -nw"
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin/"
 source $ZSH/oh-my-zsh.sh
-source /usr/local/bin/virtualenvwrapper.sh
 
 # pip should only run if there is a virtualenv currently activated
 export PIP_REQUIRE_VIRTUALENV=true
@@ -57,3 +56,9 @@ cdls() {
     fi
 }
 alias cd="cdls"
+
+if which pyenv > /dev/null;
+then
+    eval "$(pyenv init -)";
+    eval "$(pyenv virtualenv-init -)"
+fi

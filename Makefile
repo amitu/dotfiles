@@ -45,7 +45,7 @@ clean:
 brew:
 	brew install git tree unrar wget zsh cask htop
 	brew install redis
-	brew install go node python
+	brew install go node python pyenv pyenv-virtualenv
 	bre install emacs macvim GhostScript pandoc
 	brew cask install iterm2 google-chrome firefox vlc flux utorrent
 	brew cask install tunnelblick slack

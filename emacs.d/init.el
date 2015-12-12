@@ -25,15 +25,12 @@
 
 (require 'use-package)
 
-(defun my/python-mode-hook ()
-  (add-to-list 'company-backends 'company-jedi))
-
 (use-package company
   :ensure t
   :diminish (company-mode)
   :config
   (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 0)
+  (setq company-minimum-prefix-length 3)
   (setq company-dabbrev-ignore-case t)
   (setq company-dabbrev-code-ignore-case t)
   (setq company-dabbrev-downcase nil)
@@ -45,31 +42,7 @@
   (autoload 'helm-company "helm-company")
   (define-key company-mode-map (kbd "C-:") 'helm-company)
   (define-key company-active-map (kbd "C-:") 'helm-company)
-
-  (use-package company-jedi
-    :ensure t
-    :config
-    (setq jedi:complete-on-dot t)
-    (add-hook 'python-mode-hook 'my/python-mode-hook)
-  )
 )
-
-(defun do-yas-expand ()
-  (let ((yas/fallback-behavior 'return-nil))
-    (yas/expand)))
-
-(defun tab-indent-or-complete ()
-  (interactive)
-  (if (minibufferp)
-      (minibuffer-complete)
-    (if (or (not yas/minor-mode)
-            (null (do-yas-expand)))
-        (helm-company)
-    )
-  )
-)
-
-(define-key prog-mode-map [tab] 'tab-indent-or-complete)
 
 (use-package helm
   :ensure t
@@ -164,12 +137,15 @@
 (use-package deft
   :ensure t
   :init
-  (setq deft-extensions '("txt" "tex" "org")
-  (setq deft-directory "~/Dropbox/org")
+  (setq deft-extensions '("txt" "tex" "org"))
+  (setq deft-directory "~/Dropbox/org/")
   (setq deft-recursive t)
+  (setq deft-use-filename-as-title t)
   :config
   (autoload 'deft "deft" "Deft Mode" t)
+  (autoload 'deft-find-file "deft" "Open file using Deft Mode" t)
   (global-set-key (kbd "H-d") 'deft)
+  (global-set-key (kbd "C-x C-g") 'deft-find-file)
 )
 
 (use-package saveplace
@@ -293,6 +269,11 @@
 ;;;;;;;
 ;;;;;;; User Customizations
 ;;;;;;;
+
+(setq org-ditaa-jar-path "/usr/local/Cellar/ditaa/0.9/libexec/ditaa0_9.jar")
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((ditaa . t))) ; this line activates ditaa
 
 ;; htmlize
 (autoload 'htmlize-buffer "htmlize" "HTMLize current buffer" t)
