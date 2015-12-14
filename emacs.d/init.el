@@ -19,18 +19,18 @@
 )
 
 (add-to-list 'package-archives
-    '("melpa-stable" . "https://stable.melpa.org/packages/") t
+    '("melpa" . "https://melpa.org/packages/") t
 )
 (package-initialize)
 
 (require 'use-package)
 
-(use-package company
-  :ensure t
-  :diminish (company-mode)
-  :config
-  (setq company-idle-delay 1)
-  (setq company-minimum-prefix-length 1)
+;; (use-package company
+;;  :ensure t
+;;  :diminish (company-mode)
+;;  :config
+;;  (setq company-idle-delay 1)
+;;  (setq company-minimum-prefix-length 1)
   ;; (setq company-dabbrev-ignore-case t)
   ;; (setq company-dabbrev-code-ignore-case t)
   ;; (setq company-dabbrev-downcase nil)
@@ -39,28 +39,28 @@
   ;; (setq company-dabbrev-code-everywhere t)
   ;; (global-company-mode)
 
-  (autoload 'helm-company "helm-company")
-  (define-key company-mode-map (kbd "C-:") 'helm-company)
-  (define-key company-active-map (kbd "C-:") 'helm-company)
-)
+;;  (autoload 'helm-company "helm-company")
+;;  (define-key company-mode-map (kbd "C-:") 'helm-company)
+;;  (define-key company-active-map (kbd "C-:") 'helm-company)
+;;)
 
-(use-package pyenv-mode
-  :ensure t
-  :diminish (pyenv-mode)
-  :config
+;; (use-package pyenv-mode
+;;  :ensure t
+;;  :diminish (pyenv-mode)
+;;  :config
   ;; (pyenv-mode-set "rblog")
   ;; (pyenv-mode)
-)
+;;)
 
-(use-package anaconda-mode
+;;(use-package anaconda-mode
   ;; supposedly we can make anaconda mode restart and do project specific stuff
   ;; but we are forcing it to rblog mode as I cant do the switching stuff as of
   ;; now
-  :ensure t
-  :config
+;;   :ensure t
+;;  :config
   ;; (add-hook 'python-mode-hook 'anaconda-mode)
   ;; (add-hook 'python-mode-hook 'eldoc-mode)
-)
+;;)
 
 (use-package helm
   :ensure t
@@ -272,6 +272,18 @@
   ;; (color-theme-sanityinc-tomorrow-day)
 )
 
+(use-package material-theme
+  :ensure t
+  :config (load-theme 'material t)
+)
+
+(use-package flymake
+  :ensure t
+  :config
+  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  (add-hook 'elpy-mode-hook 'flycheck-mode)
+)
+
 (use-package avy
   :ensure t
   :config
@@ -279,17 +291,23 @@
   (global-set-key (kbd "s-L") 'avy-goto-word-1)
 )
 
+(use-package elpy
+  :ensure t
+  :config
+  (elpy-enable)
+)
+
 (set 'use-package-verbose t)
 
 ;; python-mode is added as a submodule
 
-(setq py-install-directory "~/.emacs.d/python-mode")
-(add-to-list 'load-path py-install-directory)
-(require 'python-mode)
+;; (setq py-install-directory "~/.emacs.d/python-mode")
+;; (add-to-list 'load-path py-install-directory)
+;; (require 'python-mode)
 
-(autoload 'python-mode "python-mode" "Python Mode." t)
-(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
-(add-to-list 'interpreter-mode-alist '("python" . python-mode))
+;; (autoload 'python-mode "python-mode" "Python Mode." t)
+;; (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+;; (add-to-list 'interpreter-mode-alist '("python" . python-mode))
 
 ;;;;;;;
 ;;;;;;; User Customizations
@@ -591,10 +609,9 @@ directory to make multiple eshell windows easier."
  '(custom-enabled-themes (quote (sanityinc-tomorrow-day)))
  '(custom-safe-themes
    (quote
-    ("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a"
-     "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58"
-     default)))
+    ("870a63a25a2756074e53e5ee28f3f890332ddc21f9e87d583c5387285e882099" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default)))
  '(fci-rule-color "#d6d6d6")
+ '(hl-sexp-background-color "#1c1f26")
  '(safe-local-variable-values
    (quote
     ((eval setq byte-compile-not-obsolete-vars

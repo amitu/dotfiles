@@ -1,7 +1,15 @@
 Features | Change log
 =====================
 
+
+emacs: elpy
+-------------
+
+deactivated anaconda etc and using elpy. flymake thing works (once right
+virtualenv is activated using pyenv-activate).
+
 emacs: avy (ace jump replacement)
+--------------------------------------
 
 Super-l: jump to line
 
