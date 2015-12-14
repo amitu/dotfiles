@@ -1,6 +1,16 @@
 Features | Change log
 =====================
 
+emacs: avy (ace jump replacement)
+
+Super-l: jump to line
+
+Super-L: jump to word
+
+Both above asks for one character, and mark lines or words starting with that
+character in buffer with one or few characters, which when typed jumps the
+cursor to appropriate line or word.
+
 emacs: yasnippets
 -----------------
 

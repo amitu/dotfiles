@@ -29,19 +29,37 @@
   :ensure t
   :diminish (company-mode)
   :config
-  (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 3)
-  (setq company-dabbrev-ignore-case t)
-  (setq company-dabbrev-code-ignore-case t)
-  (setq company-dabbrev-downcase nil)
-  (setq company-dabbrev-other-buffers 'all)
-  (setq company-dabbrev-code-other-buffers 'all)
-  (setq company-dabbrev-code-everywhere t)
-  (global-company-mode)
+  (setq company-idle-delay 1)
+  (setq company-minimum-prefix-length 1)
+  ;; (setq company-dabbrev-ignore-case t)
+  ;; (setq company-dabbrev-code-ignore-case t)
+  ;; (setq company-dabbrev-downcase nil)
+  ;; (setq company-dabbrev-other-buffers 'all)
+  ;; (setq company-dabbrev-code-other-buffers 'all)
+  ;; (setq company-dabbrev-code-everywhere t)
+  ;; (global-company-mode)
 
   (autoload 'helm-company "helm-company")
   (define-key company-mode-map (kbd "C-:") 'helm-company)
   (define-key company-active-map (kbd "C-:") 'helm-company)
+)
+
+(use-package pyenv-mode
+  :ensure t
+  :diminish (pyenv-mode)
+  :config
+  ;; (pyenv-mode-set "rblog")
+  ;; (pyenv-mode)
+)
+
+(use-package anaconda-mode
+  ;; supposedly we can make anaconda mode restart and do project specific stuff
+  ;; but we are forcing it to rblog mode as I cant do the switching stuff as of
+  ;; now
+  :ensure t
+  :config
+  ;; (add-hook 'python-mode-hook 'anaconda-mode)
+  ;; (add-hook 'python-mode-hook 'eldoc-mode)
 )
 
 (use-package helm
@@ -254,6 +272,13 @@
   ;; (color-theme-sanityinc-tomorrow-day)
 )
 
+(use-package avy
+  :ensure t
+  :config
+  (global-set-key (kbd "s-l") 'avy-goto-line)
+  (global-set-key (kbd "s-L") 'avy-goto-word-1)
+)
+
 (set 'use-package-verbose t)
 
 ;; python-mode is added as a submodule
@@ -269,6 +294,9 @@
 ;;;;;;;
 ;;;;;;; User Customizations
 ;;;;;;;
+
+(require 'paren)
+(show-paren-mode t)
 
 (setq org-ditaa-jar-path "/usr/local/Cellar/ditaa/0.9/libexec/ditaa0_9.jar")
 (org-babel-do-load-languages
@@ -291,7 +319,7 @@
 (global-hl-line-mode)
 
 ;; auto save session every desktop-auto-save-timeout=30 seconds.
-(desktop-save-mode nil)
+(desktop-save-mode -1)
 
 ; fix scrolling behaviour
 (setq mouse-wheel-scroll-amount '(3 ((shift) . 1))) ;; one line at a time
