@@ -8,6 +8,10 @@ emacs: elpy
 deactivated anaconda etc and using elpy. flymake thing works (once right
 virtualenv is activated using pyenv-activate).
 
+C-c C-n/p: go to next/prev pyflake error.
+
+
+
 emacs: avy (ace jump replacement)
 --------------------------------------
 
@@ -18,6 +22,8 @@ Super-L: jump to word
 Both above asks for one character, and mark lines or words starting with that
 character in buffer with one or few characters, which when typed jumps the
 cursor to appropriate line or word.
+
+
 
 emacs: yasnippets
 -----------------
@@ -35,11 +41,15 @@ rid of temporary output buffers opened by some commands).
 
 Autocompletion is still M-/.
 
+
+
 emacs: hyper
 ------------
 
 fn key on mac now becomes hyper key for emacs. Some binds are being added to it
 eg H-l: helm-locate.
+
+
 
 emacs: elfeed, read RSS feed
 ----------------------------
@@ -64,6 +74,8 @@ u: makr entry unread
 
 -: remove tag
 
+
+
 emacs: multi-term
 -----------------
 
@@ -81,6 +93,7 @@ C-c C-k: char mode, this is needed for pasting things.
 This as of now is quite dangerous, rm -rf ~/projects/ then paste tmp, and it
 will show "rm -rf ~/projects/tmp" but will actually execute "rm -rf
 ~/projects".
+
 
 
 emacs minor stuff
@@ -176,6 +189,7 @@ emacs: highlight current line
 ```elisp
 (global-hl-line-mode)
 ```
+
 
 emacs: fixed scrolling behaviour
 --------------------------------

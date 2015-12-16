@@ -287,13 +287,15 @@
   :ensure t
   :config
   (elpy-enable)
+  (pyvenv-activate "~/.pyenv/versions/rblog")
 )
 
 (use-package flymake
   :ensure t
   :config
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-  (add-hook 'elpy-mode-hook 'flycheck-mode)
+  ;; (add-hook 'elpy-mode-hook 'flycheck-mode)
+  (add-hook 'python-mode-hook 'flymake-mode)
 )
 
 (set 'use-package-verbose t)
