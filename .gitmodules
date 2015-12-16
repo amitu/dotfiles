@@ -7,6 +7,3 @@
 [submodule "emacs.d/ysnippets"]
 	path = emacs.d/ysnippets
 	url = git@github.com:AndreaCrotti/yasnippet-snippets.git
-[submodule "emacs.d/python-mode"]
-	path = emacs.d/python-mode
-	url = https://gitlab.com/python-mode-devs/python-mode.git

@@ -127,7 +127,6 @@
   ; C-u S-f (flush cache, and find file)
   (define-key projectile-mode-map [?\s-f] 'projectile-find-file)
   (define-key projectile-mode-map (kbd "C-c f") 'projectile-find-file)
-  (define-key projectile-mode-map [?\s-g] 'projectile-grep)
   (global-set-key (kbd "s-p") 'projectile-switch-project)
   (global-set-key (kbd "C-c p p") 'projectile-switch-project)
 )
@@ -274,7 +273,20 @@
 
 (use-package material-theme
   :ensure t
-  :config (load-theme 'material t)
+  ;; :config (load-theme 'material t)
+)
+
+(use-package avy
+  :ensure t
+  :config
+  (global-set-key (kbd "s-l") 'avy-goto-line)
+  (global-set-key (kbd "s-'") 'avy-goto-word-1)
+)
+
+(use-package elpy
+  :ensure t
+  :config
+  (elpy-enable)
 )
 
 (use-package flymake
@@ -282,19 +294,6 @@
   :config
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (add-hook 'elpy-mode-hook 'flycheck-mode)
-)
-
-(use-package avy
-  :ensure t
-  :config
-  (global-set-key (kbd "s-l") 'avy-goto-line)
-  (global-set-key (kbd "s-L") 'avy-goto-word-1)
-)
-
-(use-package elpy
-  :ensure t
-  :config
-  (elpy-enable)
 )
 
 (set 'use-package-verbose t)
@@ -370,6 +369,8 @@
 
 (global-set-key [(meta down)] 'sfp-page-down)
 (global-set-key [(meta up)] 'sfp-page-up)
+
+(global-set-key (kbd "s-1") 'delete-other-windows)
 
 ; Super-<left>/<right> should switch window
 (defun go-to-next-window ()
@@ -458,7 +459,7 @@
 
 (setq-default fill-column 80)
 (set-face-attribute 'default nil :height 120) ; font size
-;; (set-face-attribute 'default nil :height 200) ; large font size
+;; large font size: (set-face-attribute 'default nil :height 200)
 
 (defun open-line-below ()
 "Open a line below the line the point is at.
@@ -606,10 +607,10 @@ directory to make multiple eshell windows easier."
    [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector
    (vector "#4d4d4c" "#c82829" "#718c00" "#eab700" "#4271ae" "#8959a8" "#3e999f" "#ffffff"))
- '(custom-enabled-themes (quote (sanityinc-tomorrow-day)))
+ '(custom-enabled-themes (quote (material-light)))
  '(custom-safe-themes
    (quote
-    ("870a63a25a2756074e53e5ee28f3f890332ddc21f9e87d583c5387285e882099" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default)))
+    ("0aa12caf6127772c1a38f7966de8258e7a0651fb6f7220d0bbb3a0232fba967f" "870a63a25a2756074e53e5ee28f3f890332ddc21f9e87d583c5387285e882099" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" default)))
  '(fci-rule-color "#d6d6d6")
  '(hl-sexp-background-color "#1c1f26")
  '(safe-local-variable-values

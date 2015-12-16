@@ -122,6 +122,8 @@ C-c b: swith to previous buffer.
 
 M-j: join next line with the current one
 
+Super-1: delete other windows.
+
 Added htmlize package. No keyboard shortcuts, activte using M-x html...
 
 emacs: helm
