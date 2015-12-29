@@ -15,3 +15,5 @@ develop-eggs
 .DS_Store
 node_modules
 secret.txt
+local_procfile
+celerybeat-schedule

@@ -19,7 +19,7 @@
 )
 
 (add-to-list 'package-archives
-    '("melpa" . "https://melpa.org/packages/") t
+    '("melpa" . "https://stable.melpa.org/packages/") t
 )
 (package-initialize)
 
@@ -92,6 +92,7 @@
   (global-set-key (kbd "s-SPC") 'helm-all-mark-rings)
   (global-set-key (kbd "s-b") 'helm-for-files)
   (global-set-key (kbd "s-x") 'helm-M-x)
+  (global-set-key (kbd "s-X") 'kill-region)
   (global-set-key (kbd "s-i") 'helm-imenu)
   ; these is for entire file system
   (global-set-key (kbd "C-x l") 'helm-locate)
@@ -281,7 +282,16 @@
   :config
   (global-set-key (kbd "s-l") 'avy-goto-line)
   (global-set-key (kbd "s-'") 'avy-goto-word-1)
+  (global-set-key (kbd "M-SPC") 'avy-goto-char)
 )
+
+;; (use-package web-mode
+;;  :ensure t
+;;  :config
+;;  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+;;
+;;  (setq web-mode-engines-alist '(("django"    . "\\.html\\'")))
+;; )
 
 (use-package elpy
   :ensure t
@@ -373,6 +383,7 @@
 (global-set-key [(meta up)] 'sfp-page-up)
 
 (global-set-key (kbd "s-1") 'delete-other-windows)
+(global-set-key (kbd "s-3") 'split-window-right)
 
 ; Super-<left>/<right> should switch window
 (defun go-to-next-window ()
@@ -462,6 +473,7 @@
 (setq-default fill-column 80)
 (set-face-attribute 'default nil :height 120) ; font size
 ;; large font size: (set-face-attribute 'default nil :height 200)
+;; C-x C-+ C-+ C-+ etc
 
 (defun open-line-below ()
 "Open a line below the line the point is at.
@@ -505,7 +517,7 @@ beginning of line."
      (if mypos (goto-char mypos))
   )
 )
-(global-set-key (kbd "s-L") 'goto-last-change)
+(global-set-key (kbd "H-.") 'goto-last-change)
 
 ;; Prefer utf8
 (setq locale-coding-system 'utf-8)
@@ -617,7 +629,8 @@ directory to make multiple eshell windows easier."
  '(hl-sexp-background-color "#1c1f26")
  '(safe-local-variable-values
    (quote
-    ((eval setq byte-compile-not-obsolete-vars
+    ((encoding . utf-8)
+     (eval setq byte-compile-not-obsolete-vars
            (quote
             (display-buffer-function))))))
  '(vc-annotate-background nil)
